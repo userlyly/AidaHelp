@@ -1,0 +1,25 @@
+# Python 缓存与编译产物
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 虚拟环境
+.venv/
+venv/
+
+# 测试、覆盖率和静态检查缓存
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# 本地配置和运行日志
+.env
+logs/
+data/checkpoints/
+
+# IDE 与操作系统文件
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

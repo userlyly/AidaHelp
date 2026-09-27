@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0d6f69" />
+    <title>AidaHelp · 企业智能客服</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <main class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">A</div>
+          <div>
+            <strong>AidaHelp</strong>
+            <span>Enterprise Support</span>
+          </div>
+        </div>
+        <button class="new-chat" id="new-chat" type="button">
+          <span>＋</span> 发起新会话
+        </button>
+        <div class="sidebar-title">
+          <span>最近会话</span>
+          <button id="refresh-conversations" type="button" title="刷新会话">↻</button>
+        </div>
+        <div class="conversation-list" id="conversation-list">
+          <div class="empty-list">登录后加载会话</div>
+        </div>
+        <div class="sidebar-foot">
+          <div class="shield">✓</div>
+          <div>
+            <strong>安全会话</strong>
+            <span>身份校验 · 写操作确认 · 全链路审计</span>
+          </div>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <button class="mobile-menu" id="mobile-menu" type="button" aria-label="打开会话列表">☰</button>
+          <div class="agent-avatar">
+            <span class="avatar-core">AI</span>
+            <span class="online-dot"></span>
+          </div>
+          <div class="agent-meta">
+            <div class="agent-title">Aida 智能客服</div>
+            <div class="agent-status" id="agent-status">正在连接安全服务…</div>
+          </div>
+          <div class="top-actions">
+            <div class="route-pill" id="route-pill" hidden>
+              <span id="intent-label">—</span>
+              <i></i>
+              <span id="route-label">—</span>
+            </div>
+            <button class="icon-btn" id="open-settings" type="button" title="连接设置">⚙</button>
+          </div>
+        </header>
+
+        <div class="messages" id="messages" aria-live="polite">
+          <section class="welcome" id="welcome">
+            <div class="welcome-icon">A</div>
+            <p class="eyebrow">AIDAHELP / CUSTOMER AGENT</p>
+            <h1>你好，我是 Aida。</h1>
+            <p class="welcome-copy">
+              我可以查询企业政策、订单与物流，也能协助退款和转人工。涉及业务写入时，
+              我会先展示确认卡，未经你的同意不会执行。
+            </p>
+            <div class="suggestions" id="suggestions">
+              <button type="button" data-question="寄回来需要支付运费吗？">
+                <span>退</span><b>退货运费怎么承担？</b><small>企业知识库</small>
+              </button>
+              <button type="button" data-question="订单 AIDA10001 的物流到哪里了？">
+                <span>运</span><b>查询订单物流</b><small>Agent + MCP</small>
+              </button>
+              <button type="button" data-question="我要退款，订单号是 AIDA10002">
+                <span>款</span><b>申请退款</b><small>固定流程 + 确认</small>
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <div class="composer-wrap">
+          <div class="connection-warning" id="connection-warning" hidden></div>
+          <form class="composer" id="chat-form">
+            <textarea
+              id="message-input"
+              rows="1"
+              maxlength="8000"
+              placeholder="输入你想咨询的问题…"
+              aria-label="客服问题"
+            ></textarea>
+            <button class="send-btn" id="send-button" type="submit" aria-label="发送消息">
+              <span>↑</span>
+            </button>
+          </form>
+          <div class="composer-note">
+            <span>Aida 可能会犯错，重要业务结果请以订单系统记录为准。</span>
+            <span id="trace-hint">安全连接</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="settings-dialog">
+      <form method="dialog" class="settings-card">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">CONNECTION</p>
+            <h2>客服连接设置</h2>
+          </div>
+          <button value="cancel" aria-label="关闭">×</button>
+        </div>
+        <label>
+          <span>演示用户外部 ID</span>
+          <input id="external-user-id" value="demo-user" maxlength="128" />
+        </label>
+        <label>
+          <span>Bearer Token（生产环境由登录系统提供）</span>
+          <textarea id="manual-token" rows="4" placeholder="可粘贴已有 Token"></textarea>
+        </label>
+        <p class="security-copy">
+          开发环境可使用演示登录。生产环境应关闭演示入口，并接入企业 OIDC/SSO。
+        </p>
+        <div class="dialog-actions">
+          <button id="save-token" type="button" class="secondary">保存 Token</button>
+          <button id="demo-login" type="button" class="primary">演示登录</button>
+        </div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" hidden></div>
+  </body>
+</html>
